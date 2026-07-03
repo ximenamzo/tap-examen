@@ -3,9 +3,13 @@
 # use Illuminate\Http\Request
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SectionController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
 Route::apiResource('products', ProductController::class);
+Route::apiResource('profiles', ProfileController::class);
+Route::apiResource('sections', SectionController::class)->only(['index', 'store']);
