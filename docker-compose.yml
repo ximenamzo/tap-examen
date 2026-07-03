@@ -29,6 +29,9 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+      args:
+        UID: ${HOST_UID:-1000}
+        GID: ${HOST_GID:-1001}
     container_name: tap_backend
     restart: unless-stopped
     volumes:
