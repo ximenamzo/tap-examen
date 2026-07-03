@@ -110,7 +110,20 @@ return [
             'prefix_indexes' => true,
             // 'encrypt' => env('DB_ENCRYPT', 'yes'),
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
-        ],
+	],
+
+	'mongodb' => [
+	    'driver' => 'mongodb',
+	    'dsn' => env('MONGO_DB_DSN'),
+	    'host' => env('MONGO_DB_HOST', 'mongo'),
+	    'port' => env('MONGO_DB_PORT', 27017),
+	    'database' => env('MONGO_DB_DATABASE', 'tap_examen'),
+	    'username' => env('MONGO_DB_USERNAME', ''),
+	    'password' => env('MONGO_DB_PASSWORD', ''),
+	    'options' => [
+	        'authSource' => 'admin',
+	    ],
+	],
 
     ],
 
