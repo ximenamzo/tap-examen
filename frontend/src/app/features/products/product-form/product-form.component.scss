@@ -1,0 +1,35 @@
+.form-container {
+  max-width: 400px;
+  margin: 2rem auto;
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  label { margin-top: 1rem; font-size: 0.85rem; }
+  input {
+    padding: 0.5rem;
+    margin-top: 0.25rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .form-actions {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+
+    button { padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; border: 1px solid #ccc; }
+    .btn-primary { background: #1a1a1a; color: #FFD700; border: none; }
+  }
+
+  .error-message {
+    background: #fdecea;
+    color: #b71c1c;
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+  }
+}

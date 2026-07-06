@@ -1,0 +1,37 @@
+<div class="page-header">
+  <h1>Productos</h1>
+  <button [routerLink]="['/productos/nuevo']" class="btn-primary">+ Nuevo producto</button>
+</div>
+
+@if (loading()) {
+  <p>Cargando...</p>
+} @else {
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Fecha de creación</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (product of products(); track product.id) {
+        <tr>
+          <td>{{ product.code }}</td>
+          <td>{{ product.name }}</td>
+          <td>${{ product.price }}</td>
+          <td>{{ formatDate(product.created_at) }}</td>
+          <td class="actions">
+            <button [routerLink]="['/productos', product.id]" title="Ver">👁</button>
+            <button [routerLink]="['/productos', product.id, 'editar']" title="Editar">✏️</button>
+            <button (click)="onDelete(product.id)" title="Eliminar">🗑</button>
+          </td>
+        </tr>
+      } @empty {
+        <tr><td colspan="5">No hay productos registrados.</td></tr>
+      }
+    </tbody>
+  </table>
+}

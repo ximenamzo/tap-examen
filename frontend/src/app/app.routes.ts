@@ -10,6 +10,24 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/dashboard/dashboard.component').then((m) => m.DashboardComponent),
   },
+  {
+    path: 'productos',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/products/product-list/product-list.component').then((m) => m.ProductListComponent),
+  },
+  {
+    path: 'productos/nuevo',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/products/product-form/product-form.component').then((m) => m.ProductFormComponent),
+  },
+  {
+    path: 'productos/:id/editar',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/products/product-form/product-form.component').then((m) => m.ProductFormComponent),
+  },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login' },
 ];
