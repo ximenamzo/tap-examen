@@ -3,6 +3,7 @@
 # use Illuminate\Http\Request
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SectionController;
@@ -20,4 +21,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('users', UserController::class);
     Route::apiResource('profiles', ProfileController::class);
     Route::apiResource('sections', SectionController::class)->only(['index', 'store']);
+
+    Route::get('/bitacora', [BitacoraController::class, 'index']);
 });
