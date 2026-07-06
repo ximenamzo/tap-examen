@@ -23,7 +23,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # para que los archivos generados dentro del Docker no queden con el usuario root
 
 ARG UID=1000
-ARG GID=1001
+ARG GID=1000
 RUN groupadd -g ${GID} devgroup \
     && useradd -u ${UID} -g devgroup -m -s /bin/bash devuser
 
