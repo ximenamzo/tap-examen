@@ -14,6 +14,7 @@ import { RouterLink } from '@angular/router';
 })
 export class ProductFormComponent implements OnInit {
   isEditMode = signal(false);
+  isViewMode = signal(false);
   productId: string | null = null;
 
   name = '';
@@ -30,6 +31,7 @@ export class ProductFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.productId = this.route.snapshot.paramMap.get('id');
+    this.isViewMode.set(this.route.snapshot.queryParamMap.get('view') === 'true');
 
     if (this.productId) {
       this.isEditMode.set(true);

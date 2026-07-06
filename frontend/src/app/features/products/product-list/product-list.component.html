@@ -24,8 +24,8 @@
           <td>${{ product.price }}</td>
           <td>{{ formatDate(product.created_at) }}</td>
           <td class="actions">
-            <button [routerLink]="['/productos', product.id]" title="Ver">👁</button>
-            <button [routerLink]="['/productos', product.id, 'editar']" title="Editar">✏️</button>
+            <button [routerLink]="['/productos', product.id, 'editar']" [queryParams]="{ view: true }" title="Ver">👁</button>
+            <button [routerLink]="['/productos', product.id, 'editar']" title="Editar">✎</button>
             <button (click)="onDelete(product.id)" title="Eliminar">🗑</button>
           </td>
         </tr>

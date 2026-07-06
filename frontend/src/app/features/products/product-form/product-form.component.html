@@ -1,5 +1,5 @@
 <div class="form-container">
-  <h1>{{ isEditMode() ? 'Editar producto' : 'Nuevo producto' }}</h1>
+  <h1>{{ isViewMode() ? 'Ver producto' : (isEditMode() ? 'Editar producto' : 'Nuevo producto') }}</h1>
 
   @if (errorMessage()) {
     <div class="error-message">{{ errorMessage() }}</div>
@@ -7,17 +7,19 @@
 
   <form (ngSubmit)="onSubmit()">
     <label>Nombre</label>
-    <input type="text" name="name" [(ngModel)]="name" required maxlength="255" />
+    <input type="text" name="name" [(ngModel)]="name" required maxlength="255" [disabled]="isViewMode()" />
 
     <label>Marca</label>
-    <input type="text" name="brand" [(ngModel)]="brand" required maxlength="255" />
+    <input type="text" name="brand" [(ngModel)]="brand" required maxlength="255" [disabled]="isViewMode()" />
 
     <label>Precio (máx. 3 dígitos)</label>
-    <input type="number" name="price" [(ngModel)]="price" required max="999" min="0" />
+    <input type="number" name="price" [(ngModel)]="price" required max="999" min="0" [disabled]="isViewMode()" />
 
     <div class="form-actions">
-      <button type="button" routerLink="/productos">Cancelar</button>
-      <button type="submit" class="btn-primary">Guardar</button>
+      <button type="button" routerLink="/productos">{{ isViewMode() ? 'Volver' : 'Cancelar' }}</button>
+      @if (!isViewMode()) {
+        <button type="submit" class="btn-primary">Guardar</button>
+      }
     </div>
   </form>
 </div>
