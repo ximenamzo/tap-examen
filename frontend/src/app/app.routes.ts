@@ -65,6 +65,12 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/profiles/profile-form/profile-form.component').then((m) => m.ProfileFormComponent),
   },
+  {
+    path: 'cambiar-password',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/auth/change-password/change-password.component').then((m) => m.ChangePasswordComponent),
+  },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login' },
 ];

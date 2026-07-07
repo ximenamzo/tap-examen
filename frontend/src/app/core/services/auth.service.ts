@@ -61,4 +61,12 @@ export class AuthService {
     const raw = localStorage.getItem('auth_user');
     return raw ? JSON.parse(raw) : null;
   }
+
+  changePassword(currentPassword: string, newPassword: string, newPasswordConfirmation: string): Observable<any> {
+  return this.http.post(`${environment.apiUrl}/change-password`, {
+    current_password: currentPassword,
+    new_password: newPassword,
+    new_password_confirmation: newPasswordConfirmation,
+  });
+}
 }

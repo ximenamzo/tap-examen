@@ -32,4 +32,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('sections', SectionController::class)->only(['index', 'store']);
 
     Route::get('/bitacora', [BitacoraController::class, 'index']);
+
+    Route::post('/change-password', [AuthController::class, 'changePassword']);
 });
