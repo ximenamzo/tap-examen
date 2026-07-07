@@ -1,0 +1,51 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 220px;
+  background: #1a1a1a;
+  color: white;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+
+  h2 { color: #FFD700; margin: 0 0 0.25rem; font-size: 1.2rem; }
+  .user-name { color: #aaa; font-size: 0.85rem; margin: 0 0 1.5rem; }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+
+    li { margin-bottom: 0.5rem; }
+
+    a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      padding: 0.6rem 0.8rem;
+      border-radius: 4px;
+
+      &.active { background: #FFD700; color: #1a1a1a; font-weight: bold; }
+      &:hover:not(.active) { background: #333; }
+    }
+  }
+
+  .logout-btn {
+    background: transparent;
+    color: #ff6b6b;
+    border: 1px solid #ff6b6b;
+    padding: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+}
+
+.content {
+  flex: 1;
+  padding: 2rem;
+  background: #fafafa;
+}
