@@ -14,6 +14,9 @@
         @if (authService.hasAccess('profiles')) {
           <li><a routerLink="/perfiles" routerLinkActive="active">Perfiles</a></li>
         }
+        @if (authService.hasAccess('profiles')) {
+          <li><a routerLink="/bitacora" routerLinkActive="active">Bitácora</a></li>
+        }
       </ul>
 
       <button class="logout-btn" (click)="authService.logout()">Cerrar sesión</button>

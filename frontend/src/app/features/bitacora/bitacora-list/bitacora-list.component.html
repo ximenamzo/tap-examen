@@ -1,0 +1,62 @@
+<table class="data-table">
+  <thead>
+    <tr>
+      <th>Entidad alterada</th>
+      <th>Acción</th>
+      <th>Fecha</th>
+      <th>Usuario responsable</th>
+      <th>Detalle</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (record of records(); track record.id) {
+      <tr>
+        <td>{{ record.entidad }}</td>
+        <td>
+          <span class="badge" [class]="record.accion">{{ accionLabel(record.accion) }}</span>
+        </td>
+        <td>{{ formatDate(record.created_at) }}</td>
+        <td>{{ record.usuario_nombre }}</td>
+        <td>
+          <button (click)="toggleExpand(record.id)" class="btn-link">
+            {{ expandedId() === record.id ? 'Ocultar' : 'Ver cambios' }}
+          </button>
+        </td>
+      </tr>
+      @if (expandedId() === record.id) {
+        <tr class="expanded-row">
+          <td colspan="5">
+                @if (record.accion === 'creacion') {
+                <p class="info-message">Registro creado.</p>
+                } @else if (record.accion === 'eliminacion') {
+                <p class="info-message">Registro eliminado.</p>
+                } @else if (getDiff(record).length > 0) {
+                <table class="diff-table">
+                    <thead>
+                    <tr>
+                        <th>Campo</th>
+                        <th>Antes</th>
+                        <th>Después</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @for (diff of getDiff(record); track diff.field) {
+                        <tr>
+                        <td>{{ diff.field }}</td>
+                        <td>{{ diff.before ?? '—' }}</td>
+                        <td>{{ diff.after ?? '—' }}</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+                } @else {
+                <p class="info-message">Se actualizó información sensible (contraseña), no mostrada por seguridad.</p>
+                }
+          </td>
+        </tr>
+      }
+    } @empty {
+      <tr><td colspan="5">No hay registros en la bitácora.</td></tr>
+    }
+  </tbody>
+</table>

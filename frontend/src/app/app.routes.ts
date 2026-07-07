@@ -73,6 +73,12 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/auth/change-password/change-password.component').then((m) => m.ChangePasswordComponent),
   },
+  {
+  path: 'bitacora',
+    canActivate: [authGuard, sectionGuard('profiles')],
+    loadComponent: () =>
+      import('./features/bitacora/bitacora-list/bitacora-list.component').then((m) => m.BitacoraListComponent),
+  },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login' },
 ];

@@ -1,0 +1,82 @@
+.page-header {
+  margin-bottom: 1rem;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th, td {
+    text-align: left;
+    padding: 0.6rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  th { background: #f8f8f8; }
+}
+
+.badge {
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  color: white;
+
+  &.creacion { background: #2e7d32; }
+  &.actualizacion { background: #1565c0; }
+  &.eliminacion { background: #c62828; }
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: #1565c0;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 0.85rem;
+}
+
+.expanded-row td {
+  background: #fafafa;
+}
+
+.diff-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.diff-column {
+  flex: 1;
+
+  h4 { margin: 0 0 0.4rem; font-size: 0.85rem; }
+
+  pre {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 0.6rem;
+    font-size: 0.75rem;
+    overflow-x: auto;
+    white-space: pre-wrap;
+  }
+}
+
+.diff-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+
+  th, td {
+    padding: 0.4rem 0.6rem;
+    border: 1px solid #ddd;
+    font-size: 0.8rem;
+    text-align: left;
+  }
+
+  th { background: #f0f0f0; }
+}
+
+.info-message {
+  font-size: 0.9rem;
+  color: #888;
+  margin: 0;
+}

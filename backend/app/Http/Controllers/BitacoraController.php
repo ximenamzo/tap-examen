@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bitacora;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BitacoraController extends Controller
 {
-    // GET /api/bitacora?entidad=Product&entidad_id=xxxx
     public function index(Request $request)
     {
         $query = Bitacora::query();
@@ -20,6 +20,18 @@ class BitacoraController extends Controller
             $query->where('entidad_id', $request->entidad_id);
         }
 
-        return response()->json($query->orderByDesc('created_at')->get());
+        $records = $query->orderByDesc('created_at')->get();
+
+        $userIds = $records->pluck('usuario_id')->filter()->unique();
+        $usersById = User::whereIn('_id', $userIds)->get()->keyBy('_id');
+
+        $records->transform(function ($record) use ($usersById) {
+            $record->usuario_nombre = $record->usuario_id
+                ? ($usersById[$record->usuario_id]->name ?? 'Usuario eliminado')
+                : 'Sistema (autoservicio)';
+            return $record;
+        });
+
+        return response()->json($records);
     }
 }
