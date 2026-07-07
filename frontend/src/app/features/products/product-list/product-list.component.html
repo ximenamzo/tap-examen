@@ -1,6 +1,10 @@
 <div class="page-header">
   <h1>Productos</h1>
-  <button [routerLink]="['/productos/nuevo']" class="btn-primary">+ Nuevo producto</button>
+  <div class="header-actions">
+    <button (click)="onExportPdf()" class="btn-secondary" title="Descargar PDF">⬇️📄 PDF</button>
+    <button (click)="onExportExcel()" class="btn-secondary" title="Descargar Excel">⬇️📊 Excel</button>
+    <button [routerLink]="['/productos/nuevo']" class="btn-primary" title="Nuevo producto">+ Nuevo producto</button>
+  </div>
 </div>
 
 @if (loading()) {

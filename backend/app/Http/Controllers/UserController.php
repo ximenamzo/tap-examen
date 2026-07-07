@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Exports\UsersExport;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -78,5 +81,19 @@ class UserController extends Controller
     {
         User::findOrFail($id)->delete();
         return response()->json(null, 204);
+    }
+
+    // GET /api/users/export/pdf
+    public function exportPdf()
+    {
+        $users = User::all();
+        $pdf = Pdf::loadView('pdf.users', compact('users'));
+        return $pdf->download('usuarios.pdf');
+    }
+
+    // GET /api/users/export/excel
+    public function exportExcel()
+    {
+        return Excel::download(new UsersExport, 'usuarios.xlsx');
     }
 }

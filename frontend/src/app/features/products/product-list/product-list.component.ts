@@ -45,4 +45,21 @@ export class ProductListComponent implements OnInit {
     const pad = (n: number) => n.toString().padStart(2, '0');
     return `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
   }
+
+  downloadFile(blob: Blob, filename: string): void {
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+    window.URL.revokeObjectURL(url);
+  }
+
+  onExportPdf(): void {
+    this.productService.exportPdf().subscribe((blob) => this.downloadFile(blob, 'productos.pdf'));
+  }
+
+  onExportExcel(): void {
+    this.productService.exportExcel().subscribe((blob) => this.downloadFile(blob, 'productos.xlsx'));
+  }
 }

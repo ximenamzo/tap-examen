@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Exports\ProductsExport;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -72,5 +75,19 @@ class ProductController extends Controller
     {
         Product::findOrFail($id)->delete();
         return response()->json(null, 204);
+    }
+
+    // GET /api/products/export/pdf
+    public function exportPdf()
+    {
+        $products = Product::all();
+        $pdf = Pdf::loadView('pdf.products', compact('products'));
+        return $pdf->download('productos.pdf');
+    }
+
+    // GET /api/products/export/excel
+    public function exportExcel()
+    {
+        return Excel::download(new ProductsExport, 'productos.xlsx');
     }
 }

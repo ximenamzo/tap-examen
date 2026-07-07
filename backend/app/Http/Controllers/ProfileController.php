@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Profile;
 use App\Models\Section;
 use Illuminate\Http\Request;
+use App\Exports\ProfilesExport;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProfileController extends Controller
 {
@@ -65,5 +68,19 @@ class ProfileController extends Controller
     {
         Profile::findOrFail($id)->delete();
         return response()->json(null, 204);
+    }
+
+    // GET /api/profiles/export/pdf
+    public function exportPdf()
+    {
+        $profiles = Profile::all();
+        $pdf = Pdf::loadView('pdf.profiles', compact('profiles'));
+        return $pdf->download('perfiles.pdf');
+    }
+
+    // GET /api/profiles/export/excel
+    public function exportExcel()
+    {
+        return Excel::download(new ProfilesExport, 'perfiles.xlsx');
     }
 }

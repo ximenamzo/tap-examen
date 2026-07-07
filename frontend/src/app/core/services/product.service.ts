@@ -29,4 +29,12 @@ export class ProductService {
   delete(id: string): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
+
+  exportPdf(): Observable<Blob> {
+    return this.http.get(`${this.baseUrl}/export/pdf`, { responseType: 'blob' });
+  }
+
+  exportExcel(): Observable<Blob> {
+    return this.http.get(`${this.baseUrl}/export/excel`, { responseType: 'blob' });
+  }
 }
