@@ -1,0 +1,37 @@
+<div class="form-container">
+  <h1>{{ isViewMode() ? 'Ver perfil' : (isEditMode() ? 'Editar perfil' : 'Nuevo perfil') }}</h1>
+
+  @if (errorMessage()) {
+    <div class="error-message">{{ errorMessage() }}</div>
+  }
+
+  <form (ngSubmit)="onSubmit()" #profileForm="ngForm">
+    <label>Nombre</label>
+    <input type="text" name="name" [(ngModel)]="name" required maxlength="255" [disabled]="isViewMode()" />
+
+    <label>Secciones *</label>
+    <div class="checkbox-group">
+      @for (section of availableSections(); track section.id) {
+        <label class="checkbox-item">
+          <input
+            type="checkbox"
+            [checked]="isSectionSelected(section.id)"
+            (change)="toggleSection(section.id, $any($event.target).checked)"
+            [disabled]="isViewMode()"
+          />
+          {{ section.name }}
+        </label>
+      }
+    </div>
+    @if (sectionError()) {
+      <span class="field-error">{{ sectionError() }}</span>
+    }
+
+    <div class="form-actions">
+      <button type="button" routerLink="/perfiles">{{ isViewMode() ? 'Volver' : 'Cancelar' }}</button>
+      @if (!isViewMode()) {
+        <button type="submit" class="btn-primary" [disabled]="profileForm.invalid">Guardar</button>
+      }
+    </div>
+  </form>
+</div>

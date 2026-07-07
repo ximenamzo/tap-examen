@@ -1,0 +1,35 @@
+<div class="page-header">
+  <h1>Perfiles</h1>
+  <button [routerLink]="['/perfiles/nuevo']" class="btn-primary">+ Nuevo perfil</button>
+</div>
+
+@if (loading()) {
+  <p>Cargando...</p>
+} @else {
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Nombre</th>
+        <th>Acciones</th>
+        <th>Fecha de creación</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (profile of profiles(); track profile.id) {
+        <tr>
+          <td>{{ profile.code }}</td>
+          <td>{{ profile.name }}</td>
+          <td class="actions">
+            <button [routerLink]="['/perfiles', profile.id, 'editar']" [queryParams]="{ view: true }" title="Ver (detalle en modal)">👁</button>
+            <button [routerLink]="['/perfiles', profile.id, 'editar']" title="Editar">✎</button>
+            <button (click)="onDelete(profile.id)" title="Eliminar">🗑</button>
+          </td>
+          <td>{{ formatDate(profile.created_at) }}</td>
+        </tr>
+      } @empty {
+        <tr><td colspan="3">No hay perfiles registrados.</td></tr>
+      }
+    </tbody>
+  </table>
+}

@@ -46,6 +46,24 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/products/product-form/product-form.component').then((m) => m.ProductFormComponent),
   },
+  {
+    path: 'perfiles',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/profiles/profile-list/profile-list.component').then((m) => m.ProfileListComponent),
+  },
+  {
+    path: 'perfiles/nuevo',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/profiles/profile-form/profile-form.component').then((m) => m.ProfileFormComponent),
+  },
+  {
+    path: 'perfiles/:id/editar',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/profiles/profile-form/profile-form.component').then((m) => m.ProfileFormComponent),
+  },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login' },
 ];

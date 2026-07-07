@@ -9,6 +9,7 @@ export interface Profile {
   code: string;
   name: string;
   sections?: Section[];
+  created_at: string;
 }
 
 export interface User {
