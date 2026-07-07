@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TemporaryPasswordMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\ValidationException;
 
@@ -60,9 +62,11 @@ class AuthController extends Controller
 
         // INTEGRACION de envio real de correo (Mail::to($user->email)->send(...))
         // para pruebas en Postman, se regresamos en la respuesta:
+        Mail::to($user->email)->send(new TemporaryPasswordMail($newPassword));
+
         return response()->json([
             'message' => 'Se generaron nuevas credenciales y se enviaron al correo registrado.',
-            'temp_password_debug' => $newPassword, 
+            // 'temp_password_debug' => $newPassword, 
             // ELIMINAR antes de produccion
         ]);
     }

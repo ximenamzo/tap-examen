@@ -2,9 +2,11 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './features/auth/login/login.component';
 import { authGuard } from './core/guards/auth.guard';
 import { sectionGuard } from './core/guards/section.guard';
+import { ForgotPasswordComponent } from './features/auth/forgot-password/forgot-password.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
   {
     path: 'dashboard',
     canActivate: [authGuard],

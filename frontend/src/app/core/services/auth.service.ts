@@ -63,10 +63,14 @@ export class AuthService {
   }
 
   changePassword(currentPassword: string, newPassword: string, newPasswordConfirmation: string): Observable<any> {
-  return this.http.post(`${environment.apiUrl}/change-password`, {
-    current_password: currentPassword,
-    new_password: newPassword,
-    new_password_confirmation: newPasswordConfirmation,
-  });
-}
+    return this.http.post(`${environment.apiUrl}/change-password`, {
+      current_password: currentPassword,
+      new_password: newPassword,
+      new_password_confirmation: newPasswordConfirmation,
+    });
+  }
+
+  forgotPassword(email: string): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/forgot-password`, { email });
+  }
 }
