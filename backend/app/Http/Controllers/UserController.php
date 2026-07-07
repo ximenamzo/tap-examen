@@ -20,9 +20,9 @@ class UserController extends Controller
         $validated = $request->validate([
             'name'           => 'required|string|max:255',
             'email'          => 'required|email|unique:mongodb.users,email',
-            'profile_photo'  => 'required|string',
-            'phone'          => 'nullable|string|max:20',
-            'profile_ids'    => 'sometimes|array',
+            'profile_photo'  => 'required|url',
+            'phone'          => 'nullable|regex:/^\+\d{1,4}\d{10}$/',
+            'profile_ids'    => 'required|array|size:1',
             'profile_ids.*'  => 'string|exists:mongodb.profiles,_id',
         ]);
 
@@ -57,10 +57,10 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         $validated = $request->validate([
-            'name'           => 'sometimes|required|string|max:255',
-            'phone'          => 'nullable|string|max:20',
-            'profile_photo'  => 'sometimes|required|string',
-            'profile_ids'    => 'sometimes|array',
+            'name'           => 'required|string|max:255',
+            'phone'          => 'nullable|regex:/^\+\d{1,4}\d{10}$/',
+            'profile_photo'  => 'required|url',
+            'profile_ids'    => 'required|array|size:1',
             'profile_ids.*'  => 'string|exists:mongodb.profiles,_id',
         ]);
 
