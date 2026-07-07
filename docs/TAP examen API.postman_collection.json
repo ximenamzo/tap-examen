@@ -316,6 +316,26 @@
       "name": "Secciones",
       "item": [
         {
+          "name": "Listar secciones",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/sections",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "sections"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
           "name": "productos",
           "request": {
             "method": "POST",
@@ -520,7 +540,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:8000/api/profile/{{profile_id}}",
+              "raw": "http://localhost:8000/api/profiles/{{profile_id}}",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -528,7 +548,7 @@
               "port": "8000",
               "path": [
                 "api",
-                "profile",
+                "profiles",
                 "{{profile_id}}"
               ]
             }
@@ -550,7 +570,7 @@
               }
             },
             "url": {
-              "raw": "http://localhost:8000/api/profile/{{profile_id}}",
+              "raw": "http://localhost:8000/api/profiles/{{profile_id}}",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -558,7 +578,7 @@
               "port": "8000",
               "path": [
                 "api",
-                "profile",
+                "profiles",
                 "{{profile_id}}"
               ]
             }
@@ -571,7 +591,7 @@
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "http://localhost:8000/api/profile/{{profile_id}}",
+              "raw": "http://localhost:8000/api/profiles/{{profile_id}}",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -579,7 +599,7 @@
               "port": "8000",
               "path": [
                 "api",
-                "profile",
+                "profiles",
                 "{{profile_id}}"
               ]
             }
@@ -598,7 +618,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"email\": \"ximena@email.com\", \r\n    \"password\": \"ptodcz3lvZ\"\r\n}",
+              "raw": "{\r\n    \"email\": \"brisa@email.com\", \r\n    \"password\": \"rGd4ks8wha\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -627,7 +647,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"email\": \"ximena@email.com\", \r\n    \"password\": \"password123\"\r\n}"
+              "raw": ""
             },
             "url": {
               "raw": "http://localhost:8000/api/logout",
@@ -796,6 +816,72 @@
           "response": []
         },
         {
+          "name": "pdf usuarios",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/users/export/pdf",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "users",
+                "export",
+                "pdf"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "pdf perfiles",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/profiles/export/pdf",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "profiles",
+                "export",
+                "pdf"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
           "name": "excel productos",
           "request": {
             "method": "GET",
@@ -821,6 +907,72 @@
               "path": [
                 "api",
                 "products",
+                "export",
+                "excel"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "excel usuarios",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/users/export/excel",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "users",
+                "export",
+                "excel"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "excel perfiles",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/profiles/export/excel",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "profiles",
                 "export",
                 "excel"
               ]
