@@ -1,0 +1,37 @@
+<div class="page-header">
+  <h1>Usuarios</h1>
+  <button [routerLink]="['/usuarios/nuevo']" class="btn-primary">+ Nuevo usuario</button>
+</div>
+
+@if (loading()) {
+  <p>Cargando...</p>
+} @else {
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Usuario</th>
+        <th>Nombre</th>
+        <th>Fecha de creación</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (user of users(); track user.id) {
+        <tr>
+          <td>{{ user.code }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ formatDate(user.created_at) }}</td>
+          <td class="actions">
+            <button [routerLink]="['/usuarios', user.id, 'editar']" [queryParams]="{ view: true }" title="Ver">👁</button>
+            <button [routerLink]="['/usuarios', user.id, 'editar']" title="Editar">✎</button>
+            <button (click)="onDelete(user.id)" title="Eliminar">🗑</button>
+          </td>
+        </tr>
+      } @empty {
+        <tr><td colspan="5">No hay usuarios registrados.</td></tr>
+      }
+    </tbody>
+  </table>
+}

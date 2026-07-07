@@ -11,6 +11,24 @@ export const routes: Routes = [
       import('./features/dashboard/dashboard.component').then((m) => m.DashboardComponent),
   },
   {
+    path: 'usuarios',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/users/user-list/user-list.component').then((m) => m.UserListComponent),
+  },
+  {
+    path: 'usuarios/nuevo',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/users/user-form/user-form.component').then((m) => m.UserFormComponent),
+  },
+  {
+    path: 'usuarios/:id/editar',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/users/user-form/user-form.component').then((m) => m.UserFormComponent),
+  },
+  {
     path: 'productos',
     canActivate: [authGuard],
     loadComponent: () =>

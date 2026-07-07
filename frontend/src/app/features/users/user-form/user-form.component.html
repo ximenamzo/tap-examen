@@ -1,0 +1,94 @@
+<div class="form-container">
+  <h1>{{ isViewMode() ? 'Ver usuario' : (isEditMode() ? 'Editar usuario' : 'Nuevo usuario') }}</h1>
+
+  @if (errorMessage()) {
+    <div class="error-message">{{ errorMessage() }}</div>
+  }
+
+  <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+    <label>Nombre</label>
+    <input type="text" name="name" [(ngModel)]="name" required maxlength="255" [disabled]="isViewMode()" />
+
+    <label>Correo (usuario)</label>
+    <input
+      type="email"
+      name="email"
+      [(ngModel)]="email"
+      required
+      email
+      #emailModel="ngModel"
+      [disabled]="isViewMode() || isEditMode()"
+    />
+    @if (emailModel.invalid && emailModel.touched) {
+      <span class="field-error">Ingresa un correo electrónico válido.</span>
+    }
+
+    <label>Teléfono (opcional)</label>
+    <div class="phone-group">
+      <select [(ngModel)]="countryCode" name="countryCode" [disabled]="isViewMode()">
+        @for (c of countryCodes; track c.code) {
+          <option [value]="c.code">{{ c.label }}</option>
+        }
+      </select>
+      <input
+        type="text"
+        name="phoneDigits"
+        [(ngModel)]="phoneDigits"
+        pattern="[0-9]{10}"
+        maxlength="10"
+        placeholder="10 dígitos"
+        #phoneModel="ngModel"
+        [disabled]="isViewMode()"
+      />
+    </div>
+    @if (phoneModel.invalid && phoneModel.touched) {
+      <span class="field-error">El teléfono debe tener exactamente 10 dígitos numéricos.</span>
+    }
+
+    <label>Foto de perfil (URL) *</label>
+    <input
+      type="url"
+      name="profilePhoto"
+      [(ngModel)]="profilePhoto"
+      required
+      pattern="https?://.+"
+      #photoModel="ngModel"
+      [disabled]="isViewMode()"
+    />
+    @if (photoModel.invalid && photoModel.touched) {
+      <span class="field-error">
+        @if (photoModel.errors?.['required']) {
+          La foto de perfil es obligatoria.
+        } @else {
+          Ingresa una URL válida (debe iniciar con http:// o https://).
+        }
+      </span>
+    }
+
+    <label>Perfil *</label>
+    <div class="radio-group">
+      @for (profile of availableProfiles(); track profile.id) {
+        <label class="radio-item">
+          <input
+            type="radio"
+            name="profileRadio"
+            [value]="profile.id"
+            [(ngModel)]="selectedProfileId"
+            [disabled]="isViewMode()"
+          />
+          {{ profile.name }}
+        </label>
+      }
+    </div>
+    @if (profileError()) {
+      <span class="field-error">{{ profileError() }}</span>
+    }
+
+    <div class="form-actions">
+      <button type="button" routerLink="/usuarios">{{ isViewMode() ? 'Volver' : 'Cancelar' }}</button>
+      @if (!isViewMode()) {
+        <button type="submit" class="btn-primary" [disabled]="userForm.invalid">Guardar</button>
+      }
+    </div>
+  </form>
+</div>
