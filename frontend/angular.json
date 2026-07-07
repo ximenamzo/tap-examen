@@ -62,6 +62,11 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "allowedHosts": [
+              "queue-beyond-internship-departure.trycloudflare.com"
+            ]
+          },
           "configurations": {
             "production": {
               "buildTarget": "angular_temp:build:production"
